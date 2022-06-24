@@ -3,6 +3,7 @@
     <nav-bar />
     <b-form-select v-model="anoAtual" :options="optionsAnos"></b-form-select>
     <b-form-select v-model="mesAtual" :options="optionsMes"></b-form-select>
+    <side-form :form="form" @submit="submit" />
     <side-bar :dia="diaSideBar" :mes="mesSideBar" :ano="anoAtual" />
     <b-container class="my-3">
       <month :meses="transformData" @onClickMonth="infoToSideBar" />
@@ -14,8 +15,9 @@
 import NavBar from "../components/NavBar.vue";
 import Month from "../components/Month.vue";
 import SideBar from "../components/SideBar.vue";
+import SideForm from "../components/SideForm.vue";
 export default {
-  components: { NavBar, Month, SideBar },
+  components: { NavBar, Month, SideBar, SideForm },
   methods: {
     infoToSideBar(dia, nomeMes) {
       this.diaSideBar = dia;
@@ -23,6 +25,9 @@ export default {
     },
     getData() {
       this.data = require("../data/data.json");
+    },
+    submit(form) {
+      console.log("submit");
     },
   },
   data: function () {
@@ -41,6 +46,12 @@ export default {
         { value: 1, text: "Janeiro" },
         { value: 2, text: "Fevereiro" },
       ],
+      form: {
+        titulo: "",
+        descricao: "",
+        data: "",
+        cor: "",
+      },
     };
   },
   computed: {

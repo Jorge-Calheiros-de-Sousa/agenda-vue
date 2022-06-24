@@ -79,7 +79,7 @@ export default {
 
 .--d-grid-mouth {
   display: grid !important;
-  grid-template-columns: repeat(7, 172px) !important;
+  grid-template-columns: repeat(7, 13.5%) !important;
   gap: 10px;
 }
 .min-width {
