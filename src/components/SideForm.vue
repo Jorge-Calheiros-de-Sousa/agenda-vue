@@ -67,14 +67,6 @@
 
 <script>
 export default {
-  props: {
-    form: {
-      titulo: "",
-      descricao: "",
-      data: "",
-      cor: "",
-    },
-  },
   data: function () {
     return {
       options: [
@@ -82,6 +74,12 @@ export default {
         { text: "Vermelho", value: "danger" },
         { text: "Verde", value: "success" },
       ],
+      form: {
+        titulo: "",
+        descricao: "",
+        data: "",
+        cor: "",
+      },
     };
   },
 };

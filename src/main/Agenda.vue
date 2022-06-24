@@ -2,11 +2,14 @@
   <div>
     <nav-bar />
     <b-form-select v-model="anoAtual" :options="optionsAnos"></b-form-select>
-    <b-form-select v-model="mesAtual" :options="optionsMes"></b-form-select>
-    <side-form :form="form" @submit="submit" />
-    <side-bar :dia="diaSideBar" :mes="mesSideBar" :ano="anoAtual" />
+    <side-form @submit="submit" />
+    <side-bar :info="infoSideBar" />
     <b-container class="my-3">
-      <month :meses="transformData" @onClickMonth="infoToSideBar" />
+      <month
+        :anoAtual="anoAtual"
+        :tarefas="data"
+        @onClickMonth="infoToSideBar"
+      />
     </b-container>
   </div>
 </template>
@@ -19,9 +22,8 @@ import SideForm from "../components/SideForm.vue";
 export default {
   components: { NavBar, Month, SideBar, SideForm },
   methods: {
-    infoToSideBar(dia, nomeMes) {
-      this.diaSideBar = dia;
-      this.mesSideBar = nomeMes;
+    infoToSideBar(info) {
+      this.infoSideBar = info;
     },
     getData() {
       this.data = require("../data/data.json");
@@ -32,35 +34,15 @@ export default {
   },
   data: function () {
     return {
-      diaSideBar: {},
-      mesSideBar: {},
-      anoAtual: 2022,
+      infoSideBar: {},
+      anoAtual: new Date().getFullYear(),
       data: [],
-      mesAtual: 1,
       optionsAnos: [
         { value: 2024, text: "2024" },
         { value: 2023, text: "2023" },
         { value: 2022, text: "2022" },
       ],
-      optionsMes: [
-        { value: 1, text: "Janeiro" },
-        { value: 2, text: "Fevereiro" },
-      ],
-      form: {
-        titulo: "",
-        descricao: "",
-        data: "",
-        cor: "",
-      },
     };
-  },
-  computed: {
-    transformData() {
-      const data = this.data.filter(
-        (data) => data.numeroDoMes === this.mesAtual
-      );
-      return data;
-    },
   },
   mounted() {
     this.getData();

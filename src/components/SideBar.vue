@@ -2,20 +2,12 @@
   <div>
     <b-sidebar
       id="day"
-      :title="'Dia: ' + dia.numero + ' de ' + mes.nome + ' de ' + ano"
+      :title="'Dia: ' + info.numero + ' de ' + info.mes + ' de ' + info.ano"
       shadow
     >
-      <b-card header="Feriado" v-if="dia.feriado">
+      <b-card header="Tarefas" v-if="info.tarefas">
         <b-list-group>
-          <b-list-group-item>
-            <b-icon icon="exclamation-circle-fill" variant="primary"></b-icon>
-            {{ dia.feriado }}</b-list-group-item
-          >
-        </b-list-group>
-      </b-card>
-      <b-card header="Tarefas" v-if="dia.tarefas">
-        <b-list-group>
-          <b-list-group-item v-for="tarefa in dia.tarefas" :key="tarefa.id">
+          <b-list-group-item v-for="tarefa in info.tarefas" :key="tarefa.id">
             <b-icon
               icon="exclamation-circle-fill"
               :variant="tarefa.cor"
@@ -34,9 +26,12 @@
 <script>
 export default {
   props: {
-    dia: {},
-    ano: {},
-    mes: {},
+    info: {
+      numero: 0,
+      mes: "",
+      ano: 0,
+      tarefas: [],
+    },
   },
 };
 </script>
